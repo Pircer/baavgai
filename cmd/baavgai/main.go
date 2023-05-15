@@ -1,14 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	application "baavgai/internal/app"
+)
 
 func main() {
-	fmt.Println("Application start")
-
-	app := app.New()
-
+	app := application.New()
 	err := app.Run()
 	if err != nil {
-		return err.Error()
+		fmt.Println(err.Error())
 	}
 }

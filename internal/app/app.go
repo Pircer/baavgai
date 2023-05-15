@@ -2,8 +2,8 @@ package app
 
 type Application struct{}
 
-func (app *Application) New() error {
-	return nil
+func New() *Application {
+	return &Application{}
 }
 
 func (app *Application) Run() error {
