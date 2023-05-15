@@ -20,5 +20,8 @@
 # Go workspace file
 go.work
 
-# Dinary files directory
+# Binary files directory
 bin/
+
+# Goland IDE files
+.idea/
