@@ -19,10 +19,10 @@ type Config struct {
 }
 
 type ApplicationParams struct {
-		Environment string `yaml:"environment"`
-		Host        string `yaml:"host"`
-		Port        string `yaml:"port"`
-		LogLevel    string `yaml:"log-level"`
+	Environment string `yaml:"environment"`
+	Host        string `yaml:"host"`
+	Port        string `yaml:"port"`
+	LogLevel    string `yaml:"log-level"`
 }
 
 func Load(configPath string) (*Config, error) {
@@ -35,12 +35,12 @@ func Load(configPath string) (*Config, error) {
 		return nil, err
 	}
 	config := &Config{
-		App: ApplicationParams {
-			App.Environment: DEFAULT_ENVIRONMENT,
-			App.Host:        DEFAULT_HOST,
-			App.Port:        DEFAULT_PORT,
-			App.LogLevel:    DEFAULT_LOG_LEVEL,
-		}
+		App: ApplicationParams{
+			Environment: DEFAULT_ENVIRONMENT,
+			Host:        DEFAULT_HOST,
+			Port:        DEFAULT_PORT,
+			LogLevel:    DEFAULT_LOG_LEVEL,
+		},
 	}
 	err = yaml.Unmarshal(yamlData, config)
 	if err != nil {
