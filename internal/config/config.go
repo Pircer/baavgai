@@ -41,7 +41,7 @@ func Load(configPath string) (Config, error) {
 			LogLevel:    defaultLogLevel,
 		},
 	}
-	err = yaml.Unmarshal(yamlData, config)
+	err = yaml.Unmarshal(yamlData, &config)
 	if err != nil {
 		return Config{}, err
 	}
