@@ -2,6 +2,6 @@ version: '3'
 services:
   baavgai:
     build:
-      dockerfile: Dockerfile.frontend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
