@@ -1,17 +1,16 @@
 package config
 
 import (
+	"gopkg.in/yaml.v2"
 	"os"
 	"path/filepath"
-
-	"gopkg.in/yaml.v2"
 )
 
 const (
-	DEFAULT_ENVIRONMENT = "dev"
-	DEFAULT_LOG_LEVEL   = "Error"
-	DEFAULT_HOST        = "localhost"
-	DEFAULT_PORT        = "8000"
+	defaultEnvironment = "dev"
+	defaultLogLevel    = "error"
+	defaultHost        = "localhost"
+	defaultPort        = "8000"
 )
 
 type Config struct {
@@ -25,26 +24,26 @@ type ApplicationParams struct {
 	LogLevel    string `yaml:"log-level"`
 }
 
-func Load(configPath string) (*Config, error) {
+func Load(configPath string) (Config, error) {
 	fileName, err := filepath.Abs(configPath)
 	if err != nil {
-		return nil, err
+		return Config{}, err
 	}
 	yamlData, err := os.ReadFile(fileName)
 	if err != nil {
-		return nil, err
+		return Config{}, err
 	}
-	config := &Config{
+	config := Config{
 		App: ApplicationParams{
-			Environment: DEFAULT_ENVIRONMENT,
-			Host:        DEFAULT_HOST,
-			Port:        DEFAULT_PORT,
-			LogLevel:    DEFAULT_LOG_LEVEL,
+			Environment: defaultEnvironment,
+			Host:        defaultHost,
+			Port:        defaultPort,
+			LogLevel:    defaultLogLevel,
 		},
 	}
 	err = yaml.Unmarshal(yamlData, config)
 	if err != nil {
-		return nil, err
+		return Config{}, err
 	}
 	return config, nil
 }
