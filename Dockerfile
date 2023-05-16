@@ -1,10 +1,25 @@
-FROM alpine
+FROM golang:latest as build
+RUN mkdir -p /root/.ssh && \
+    chmod 0700 /root/.ssh && \
+    ssh-keyscan gitlab.services.mts.ru > /root/.ssh/known_hosts
+COPY id_rsa /root/.ssh/id_rsa
+COPY mts-cert.pem /etc/ssl/certs
+RUN
+RUN chmod 0600 /root/.ssh/id_rsa
 
-WORKDIR /app
+ENV GOPROXY=https://nexus.services.mts.ru/repository/go-proxy/
+ENV GOPRIVATE=gitlab.services.mts.ru
+ENV GOSUMDB="sum.golang.org https://nexus.services.mts.ru/repository/go-sum"
 
-COPY bin/baavgai .
-COPY bin/config.yaml .
+WORKDIR /app/
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o baavgai ./cmd/baavgai
 
+FROM alpine:latest
+
+COPY --from=build /app/baavgai /baavgai
+COPY config.yaml /config.yaml
 EXPOSE 8000
-ENTRYPOINT [". /baavgai"]
+ENTRYPOINT ["/baavgai"]
+
 

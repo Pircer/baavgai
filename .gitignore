@@ -25,3 +25,7 @@ bin/
 
 # Goland IDE files
 .idea/
+
+# Keys files
+mts-cert.pem
+id_rsa
