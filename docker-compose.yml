@@ -1,6 +1,7 @@
 version: '3'
 services:
   baavgai:
+    image: baavgai:v3
     build:
       dockerfile: Dockerfile
     ports:

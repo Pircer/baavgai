@@ -17,7 +17,8 @@ func (app *Application) ProcessWithGracefullShutdown() error {
 		syscall.SIGQUIT)
 
 	go func() {
-		serviceAddress := app.Config.App.Host + ":" + app.Config.App.Port
+		serviceAddress := ":" + app.Config.App.Port
+		app.Logger.Info().Msgf("HTPP service port: %v", serviceAddress)
 		if err := app.HTTPService.Listen(serviceAddress); err != nil {
 			app.Logger.Error().Msg(err.Error())
 		}

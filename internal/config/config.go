@@ -9,7 +9,6 @@ import (
 const (
 	defaultEnvironment = "dev"
 	defaultLogLevel    = "error"
-	defaultHost        = "localhost"
 	defaultPort        = "8000"
 )
 
@@ -19,7 +18,6 @@ type Config struct {
 
 type ApplicationParams struct {
 	Environment string `yaml:"environment"`
-	Host        string `yaml:"host"`
 	Port        string `yaml:"port"`
 	LogLevel    string `yaml:"log-level"`
 }
@@ -36,7 +34,6 @@ func Load(configPath string) (Config, error) {
 	config := Config{
 		App: ApplicationParams{
 			Environment: defaultEnvironment,
-			Host:        defaultHost,
 			Port:        defaultPort,
 			LogLevel:    defaultLogLevel,
 		},

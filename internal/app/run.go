@@ -22,10 +22,12 @@ func (app *Application) Run() error {
 	if err != nil {
 		return err
 	}
+
 	err = app.ProcessWithGracefullShutdown()
 	if err != nil {
 		return err
 	}
+
 	err = app.Clear()
 	if err != nil {
 		return err
@@ -38,13 +40,16 @@ func (app *Application) Init() error {
 	if err != nil {
 		return err
 	}
+
 	err = app.SetupLogger()
 	if err != nil {
 		return err
 	}
+
 	app.HTTPService = fiber.New()
 	router := http.New(app.HTTPService)
 	router.RoutesInit()
+
 	app.Logger.Info().Msg("Application initialization successful")
 	return nil
 }
