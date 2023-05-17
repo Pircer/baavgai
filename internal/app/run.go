@@ -55,6 +55,10 @@ func (app *Application) Init() error {
 }
 
 func (app *Application) Clear() error {
+	if err := app.HTTPService.Shutdown(); err != nil {
+		return err
+	}
+
 	app.Logger.Info().Msg("Application clearance successful")
 	return nil
 }

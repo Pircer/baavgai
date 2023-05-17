@@ -27,8 +27,5 @@ func (app *Application) ProcessWithGracefullShutdown() error {
 	stop := <-signalListener
 	app.Logger.Info().Msgf("Recieved signal: %v", stop)
 
-	if err := app.HTTPService.Shutdown(); err != nil {
-		return err
-	}
 	return nil
 }
