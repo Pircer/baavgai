@@ -18,7 +18,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o baavgai ./cmd/baavgai
 FROM alpine:latest
 
 COPY --from=build /app/baavgai /baavgai
-COPY config.yaml /config.yaml
+COPY internal/config/config.yaml /config.yaml
 EXPOSE 8000
 ENTRYPOINT ["/baavgai"]
 

@@ -6,6 +6,7 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"
+	"time"
 )
 
 var configFile = flag.String("config", "config.yaml", "config file path")
@@ -42,7 +43,7 @@ func (app *Application) SetupLogger() error {
 	}
 
 	zerolog.SetGlobalLevel(logLevel)
-	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
+	zerolog.TimeFieldFormat = time.RFC3339
 
 	app.Logger = zerolog.New(os.Stderr).With().Timestamp().Logger()
 
