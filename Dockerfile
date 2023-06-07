@@ -1,11 +1,4 @@
-FROM golang:latest as build
-RUN mkdir -p /root/.ssh && \
-    chmod 0700 /root/.ssh && \
-    ssh-keyscan gitlab.services.mts.ru > /root/.ssh/known_hosts
-COPY id_rsa /root/.ssh/id_rsa
-COPY mts-cert.pem /etc/ssl/certs
-RUN
-RUN chmod 0600 /root/.ssh/id_rsa
+FROM base:latest as build
 
 ENV GOPROXY=https://nexus.services.mts.ru/repository/go-proxy/
 ENV GOPRIVATE=gitlab.services.mts.ru
